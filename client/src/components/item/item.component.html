@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-2 border bg-light">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/One_Piece_Logo.svg/1200px-One_Piece_Logo.svg.png"
+                alt="one piece" class="img-fluid">
+        </div>
+        <div class="col-4 border bg-light">
+            <h6>{{name}}</h6>
+            <strong>{{stock}}</strong>
+            <button type="button" class="btn btn-success m-3" data-bs-dismiss="modal"><i class="fa-solid fa-plus"></i></button>
+            <button type="button" class="btn btn-danger " data-bs-dismiss="modal"><i class="fa-solid fa-minus"></i></button>
+
+        </div>
+        <div class="col-4 border bg-light">
+            <div class="container">
+                <div class="row">
+                    <h6>{{price}} $</h6>
+                </div>
+                <div class="row justify-content-end align-items-end">
+                    <div class="col-2">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Suppression d'item</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer cet item?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-danger">Supprimer</button>
+                <input type="checkbox" id="noMoreAsking"> <label for="noMoreAsking">Ne plus me demander</label>
+            </div>
+        </div>
+    </div>
+</div>
