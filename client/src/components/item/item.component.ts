@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item',
@@ -6,9 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent {
-  name: string='TEST';
-  stock: number=20;
-  price: number=180;
-  constructor() { }
+  @Input() name: string='TEST';
+  @Input() stock: number=20;
+  @Input() price: number=180;
+  @Input() soldUnit: number=0;
+  
+   constructor(public  router: Router) { }
 
 }

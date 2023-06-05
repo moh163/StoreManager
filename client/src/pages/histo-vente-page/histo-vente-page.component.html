@@ -1,1 +1,95 @@
-<p>histo-vente-page works!</p>
+<h1>Historique de vente</h1>
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-8">
+            <div class="accordion" id="accordionCategorie">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                            aria-controls="panelsStayOpen-collapseOne">
+                            Accordion Item #1
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <app-item></app-item>
+                            <app-item></app-item>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseTwo">
+                            Accordion Item #2
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <app-item></app-item>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                            aria-controls="panelsStayOpen-collapseThree">
+                            Accordion Item #3
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <app-item></app-item>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-4 position-fixed end-0">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioDaily" checked>
+                <label class="form-check-label" for="radioDaily">
+                    Aujourd'hui
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioWeekly">
+                <label class="form-check-label" for="radioWeekly">
+                    Cette semaine
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioMonthly">
+                <label class="form-check-label" for="radioMonthly">
+                    Ce mois
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioAnnualy">
+                <label class="form-check-label" for="radioAnnualy">
+                    Cette année
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioAlways">
+                <label class="form-check-label" for="radioAlways">
+                    Toujours
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioPersonalised">
+                <label class="form-check-label" for="radioPersonalised">
+                    Personnalisé
+                </label>
+                <input type="text" name="daterange" value="" class="form-control" disabled/>
+
+                
+            </div>
+        </div>
+    </div>
+</div>

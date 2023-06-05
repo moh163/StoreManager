@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row justify-content-center ">
+    <div class="row justify-content-center" *ngIf="router.url === '/inventaire'">
         <div class="col-2 border bg-light">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/One_Piece_Logo.svg/1200px-One_Piece_Logo.svg.png"
                 alt="one piece" class="img-fluid">
@@ -7,8 +7,10 @@
         <div class="col-4 border bg-light">
             <h6>{{name}}</h6>
             <strong>{{stock}}</strong>
-            <button type="button" class="btn btn-success m-3" data-bs-dismiss="modal"><i class="fa-solid fa-plus"></i></button>
-            <button type="button" class="btn btn-danger " data-bs-dismiss="modal"><i class="fa-solid fa-minus"></i></button>
+            <button type="button" class="btn btn-success m-3" data-bs-dismiss="modal"><i
+                    class="fa-solid fa-plus"></i></button>
+            <button type="button" class="btn btn-danger " data-bs-dismiss="modal"><i
+                    class="fa-solid fa-minus"></i></button>
 
         </div>
         <div class="col-4 border bg-light">
@@ -18,13 +20,33 @@
                 </div>
                 <div class="row justify-content-end align-items-end">
                     <div class="col-2">
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
-                    
+
                 </div>
 
+            </div>
+
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="router.url === '/histoVente'">
+        <div class="col-2 border bg-light">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/One_Piece_Logo.svg/1200px-One_Piece_Logo.svg.png"
+                alt="one piece" class="img-fluid">
+        </div>
+        <div class="col-4 border bg-light">
+            <h6>{{name}}</h6>
+            <strong>{{soldUnit}} vendu(s)</strong>
+        </div>
+        <div class="col-4 border bg-light">
+            <div class="container">
+                <div class="row">
+                    <h6>{{price}} $/u</h6>
+                </div>
+                {{price*soldUnit}} $ total
             </div>
 
         </div>
