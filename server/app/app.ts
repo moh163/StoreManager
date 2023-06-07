@@ -5,6 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 import * as swaggerJSDoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
 import { Service } from 'typedi';
+import { DatabaseService } from './services/database.service';
 
 @Service()
 export class Application {
@@ -12,7 +13,7 @@ export class Application {
     private readonly internalError: number = StatusCodes.INTERNAL_SERVER_ERROR;
     private readonly swaggerOptions: swaggerJSDoc.Options;
 
-    constructor() {
+    constructor(databaseService: DatabaseService) {
         this.app = express();
 
         this.swaggerOptions = {
@@ -29,6 +30,7 @@ export class Application {
         this.config();
 
         this.bindRoutes();
+        databaseService.connect();
     }
 
     bindRoutes(): void {
