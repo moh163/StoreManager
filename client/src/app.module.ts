@@ -11,6 +11,7 @@ import { FinancePageComponent } from './pages/finance-page/finance-page.componen
 import { TransactionPageComponent } from './pages/transaction-page/transaction-page.component';
 import { CategorieComponent } from './components/categorie/categorie.component';
 import { ItemComponent } from './components/item/item.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ItemComponent } from './components/item/item.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

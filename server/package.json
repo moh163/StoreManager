@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "_moduleAliases": {
-    "@app": "out",
-    "@common": "out"
+    "@app": "out/server/app",
+    "@common": "out/common"
   },
   "repository": {
     "type": "git",

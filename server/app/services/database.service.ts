@@ -1,4 +1,5 @@
-import 'dotenv/config'
+import 'dotenv/config';
+import { Category } from '@common/categorie';
 import {  Db, MongoClient, ServerApiVersion } from 'mongodb';
 import { Service } from 'typedi';
 @Service()
@@ -34,10 +35,24 @@ export class DatabaseService {
         return this.client.close();
     }
 
-    //a changer
-    async getCategorie(): Promise<any> {
-        return this.database.collection(this.CATEGORIE_COLLECTION).find().toArray();
+    async getCategorie(): Promise<Category[]> {
+        const collection = this.database.collection(this.CATEGORIE_COLLECTION);
+        const categorie = await collection.find({}).toArray();
+        return categorie.map((cat) => ({
+            name: cat.name
+        }));
     }
+
+    async addCategorie(categorie: Category): Promise<void> {
+        const collection = this.database.collection(this.CATEGORIE_COLLECTION);
+        const isInCollection = await collection.findOne({ name: categorie.name });
+        if(isInCollection){
+            throw new Error('La catégorie existe déjà');
+        }else{
+        await collection.insertOne(categorie);
+        }
+    }
+    
 
     //a changer
     async getItem(): Promise<any> {
