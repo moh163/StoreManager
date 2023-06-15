@@ -1,9 +1,7 @@
-import { Category } from "./categorie";
-
-export class Item{
+export interface Item{
     name: string;
     stock: number;
     price: number;
-    soldUnit: number=0;
-    categorie: Category
+    soldUnit: number;
+    categorie: string;
 }

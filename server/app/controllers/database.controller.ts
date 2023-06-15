@@ -17,12 +17,10 @@ export class DatabaseController {
         this.router = Router();
 
         this.router.get('/categories', async (req, res) => {
-            console.log('get categorie');
            await this.databaseService.getCategorie().then((categories) => {
-                console.log('contoller get categorie reussi');
                 res.json(categories).status(HTTP_STATUS_CODES.OK)
             }).catch((err) => { 
-                console.log('erreur dans controller get categorie');
+                console.log(err);
                 res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
             });
         });
@@ -39,6 +37,31 @@ export class DatabaseController {
                 }
             });
         });
+
+        this.router.post('/items', async (req, res) => {
+            await this.databaseService.addItem(req.body).then(() => {
+                res.sendStatus(HTTP_STATUS_CODES.CREATED);
+            }).catch((err) => {
+                console.log(err);
+                if(err.message === 'L\'item existe déjà'){
+                    res.sendStatus(HTTP_STATUS_CODES.CONFLICT);
+                }else{
+                res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
+                }
+            });
+        });
+
+        this.router.get('/items/:catName', async (req, res) => {
+            await this.databaseService.getItemByCat(req.params.catName).then((items) => {
+                res.json(items).status(HTTP_STATUS_CODES.OK)
+            }).catch((err) => { 
+                console.log(err);
+                res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
+            });
+
+        });
+
+
 
     }
 }

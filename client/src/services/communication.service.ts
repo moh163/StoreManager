@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { consts } from "@common/const";
+import { Item } from '@common/item';
 import { Category } from '@common/categorie';
 import { Observable } from 'rxjs';
 
@@ -20,5 +21,11 @@ export class CommunicationService {
   }
   postNewCategory(category: Category):Observable<HttpResponse<string>> {
     return this.http.post(`${this.baseUrl}/categories`, category,  {observe: 'response',responseType: 'text',});
+  }
+  postNewItem(item: Item):Observable<HttpResponse<string>> {
+    return this.http.post(`${this.baseUrl}/items`, item,  {observe: 'response',responseType: 'text',});
+  }
+  getItemsByCat(catName: string): Observable<HttpResponse<object>> {
+    return this.http.get(`${this.baseUrl}/items/${catName}`, { observe: 'response' });
   }
 }

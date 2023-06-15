@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { Category } from '@common/categorie';
+import { Item } from '@common/item';
 import {  Db, MongoClient, ServerApiVersion } from 'mongodb';
 import { Service } from 'typedi';
 @Service()
@@ -53,6 +54,28 @@ export class DatabaseService {
         }
     }
     
+    async addItem(item: Item): Promise<void> {
+        const collection = this.database.collection(this.ITEM_COLLECTION);
+        const isInCollection = await collection.findOne({ name: item.name });
+        if(isInCollection){
+            throw new Error('L\'item existe déjà');
+        }else{
+        await collection.insertOne(item);
+        }
+
+    }
+
+    async getItemByCat(catName: string): Promise<any> {
+        const collection= this.database.collection(this.ITEM_COLLECTION)
+        const itemInCat = await collection.find({categorie: catName}).toArray();
+        return itemInCat.map((item) => ({
+            name: item.name,
+            stock: item.stock,
+            price: item.price,
+            soldUnit: item.soldUnit,
+            categorie: item.categorie
+        }));
+    }
 
     //a changer
     async getItem(): Promise<any> {
