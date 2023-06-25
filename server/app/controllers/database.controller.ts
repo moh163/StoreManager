@@ -17,7 +17,7 @@ export class DatabaseController {
         this.router = Router();
 
         this.router.get('/categories', async (req, res) => {
-           await this.databaseService.getCategorie().then((categories) => {
+           await this.databaseService.getCategories().then((categories) => {
                 res.json(categories).status(HTTP_STATUS_CODES.OK)
             }).catch((err) => { 
                 console.log(err);
@@ -43,9 +43,13 @@ export class DatabaseController {
                 res.sendStatus(HTTP_STATUS_CODES.CREATED);
             }).catch((err) => {
                 console.log(err);
-                if(err.message === 'L\'item existe déjà'){
+                if(err === 'L\'item existe déjà'){
+                    
+                    console.log('log dans controller bon');
                     res.sendStatus(HTTP_STATUS_CODES.CONFLICT);
                 }else{
+                    
+                    console.log('log dans controller mauvais');
                 res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
                 }
             });
@@ -60,6 +64,17 @@ export class DatabaseController {
             });
 
         });
+
+        this.router.patch('/items/stock', async (req, res) => {
+            await this.databaseService.updateStock(req.body.stock, req.body.id).then(() => {
+                res.sendStatus(HTTP_STATUS_CODES.OK);
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
+            });
+        }   
+        );
+
 
 
 

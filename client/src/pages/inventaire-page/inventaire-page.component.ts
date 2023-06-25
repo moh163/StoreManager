@@ -3,6 +3,7 @@ import { HTTP_STATUS_CODES } from '@common/const';
 import { Category } from '@common/categorie';
 import { CommunicationService } from 'src/services/communication.service';
 import { Item } from '@common/item';
+import { CategorieComponent } from 'src/components/categorie/categorie.component';
 
 @Component({
   selector: 'app-inventaire-page',
@@ -26,6 +27,8 @@ export class InventairePageComponent implements OnInit {
           if (res.status === HTTP_STATUS_CODES.CREATED) {
             this.categories.push(category);
             input.value = '';
+
+            this.getCategories();
             resolve();
           } else {
             if (res.status === HTTP_STATUS_CODES.CONFLICT) {
@@ -38,6 +41,7 @@ export class InventairePageComponent implements OnInit {
           }
         });
       } else {
+        alert('Aucun nom inscris')
         reject(new Error('Aucun nom inscris'));
       }
     });
@@ -65,12 +69,15 @@ export class InventairePageComponent implements OnInit {
       if (nameItem && priceItem && stockItem && categorieItem) {
         const item: Item = { name: nameItem, price: priceItem, stock: stockItem, soldUnit: 0, categorie: categorieItem };
         this.communication.postNewItem(item).subscribe((res) => {
+          console.log(res);
           if (res.status === HTTP_STATUS_CODES.CREATED) {
             inputName.value = '';
             inputPrice.value = '';
             inputStock.value = '';
             inputCategorie.value = '';
-            resolve();
+           // CategorieComponent.prototype.getItemsByCat(categorieItem); //preuve de mauvais code tt la gestion avec db a mettre dans un ou deux services
+            window.location.reload();
+           resolve();
           } else {
             if (res.status === HTTP_STATUS_CODES.CONFLICT) {
               console.log('L\'item existe déjà');
@@ -85,9 +92,10 @@ export class InventairePageComponent implements OnInit {
         reject(new Error('Aucun nom inscris'));
       }
     });
+
   }
 
- 
+
 
 
 }

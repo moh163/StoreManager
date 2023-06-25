@@ -28,4 +28,7 @@ export class CommunicationService {
   getItemsByCat(catName: string): Observable<HttpResponse<object>> {
     return this.http.get(`${this.baseUrl}/items/${catName}`, { observe: 'response' });
   }
+  updateStock(stock: number, id: String): Observable<HttpResponse<string>> {
+    return this.http.patch(`${this.baseUrl}/items/stock`,{stock: stock, id: id}, { observe: 'response', responseType: 'text' });
+  }
 }
