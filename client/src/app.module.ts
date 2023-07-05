@@ -12,6 +12,7 @@ import { TransactionPageComponent } from './pages/transaction-page/transaction-p
 import { CategorieComponent } from './components/categorie/categorie.component';
 import { ItemComponent } from './components/item/item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CategorieCarrousselComponent } from './components/categorie-carroussel/categorie-carroussel.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     FinancePageComponent,
     TransactionPageComponent,
     CategorieComponent,
-    ItemComponent
+    ItemComponent,
+    CategorieCarrousselComponent
   ],
   imports: [
     BrowserModule,

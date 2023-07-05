@@ -51,4 +51,19 @@
 
         </div>
     </div>
+    <div class="row justify-content-center" *ngIf="router.url === '/transaction'">
+        <div class="col-2 border">
+            {{item.name}}
+        </div>
+        <div class="col-4 border">
+            <input type="number" class="form-control"> 
+        </div>
+        <div class="col-2 border">
+            {{item.price}} 
+        </div>
+        <div class="col-2 border">
+            <button type="button" class="btn btn-success m-3"><i
+                class="fa-solid fa-plus" ></i></button>
+        </div>
+    </div>
 </div>
