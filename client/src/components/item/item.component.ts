@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HTTP_STATUS_CODES } from '@common/const';
 import { Item } from '@common/item';
 import { CommunicationService } from 'src/services/communication.service';
+import { TransactionService } from 'src/services/transaction.service';
 
 @Component({
   selector: 'app-item',
@@ -12,7 +13,7 @@ import { CommunicationService } from 'src/services/communication.service';
 export class ItemComponent {
   @Input() item: Item={name: '', stock: 0, price: 0, soldUnit: 0, categorie: ''};
   
-   constructor(public  router: Router, private communication: CommunicationService) { }
+   constructor(public  router: Router, private communication: CommunicationService, public transactionService: TransactionService) { }
 
    async updateStock(event: Event) {
     const button = event.currentTarget as HTMLButtonElement;

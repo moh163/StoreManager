@@ -56,13 +56,13 @@
             {{item.name}}
         </div>
         <div class="col-4 border">
-            <input type="number" class="form-control"> 
+            <input #soldUnit type="number" class="form-control" value="0" min="0"> 
         </div>
         <div class="col-2 border">
-            {{item.price}} 
+            {{item.price}} $/u
         </div>
         <div class="col-2 border">
-            <button type="button" class="btn btn-success m-3"><i
+            <button type="button" class="btn btn-success m-3" (click)="transactionService.addItem(item, soldUnit.valueAsNumber)"><i
                 class="fa-solid fa-plus" ></i></button>
         </div>
     </div>

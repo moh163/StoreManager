@@ -1,3 +1,9 @@
 #liste{
     height: 80vh;
 }
+
+.itemAdded:hover{
+    background-color: #f1d0d0;
+    cursor: pointer;
+
+}
