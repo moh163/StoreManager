@@ -8,10 +8,33 @@
                 (mouseenter)="onHover($event)" (mouseleave)="onLeave($event)" id="{{item.id}}">
                 <span class="position-relative start-0">{{item.soldUnit}} <i class="fa-solid fa-xmark fa-2xs"></i>
                     <strong> {{item.name}}</strong></span>
-                <span class="position-relative end-0"> {{item.price*item.soldUnit}}$</span>
+                <span class="position-absolute end-0"> {{item.price*item.soldUnit}}$</span>
             </div>
             <span class="position-absolute bottom-0 start-15"> <strong>Total:</strong></span>
             <span class="position-absolute bottom-0 end-0"> <strong>{{transactionService.total}}$</strong></span>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4 d-flex justify-content-around">
+        <button class="position-realtive end-0 btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmCancel">Annuler</button>
+        <button class="position-realtive end-0 btn btn-success" >Confirmer</button>
         </div>
     </div>
 </div>
+<!--modal-->
+<div class="modal fade" id="confirmCancel" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Êtes-vous sur de vouloir annuler la transaction?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="this.transactionService.cancelTransaction()">Annuler</button>
+        </div>
+      </div>
+    </div>
+  </div>

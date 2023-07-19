@@ -26,5 +26,6 @@ export class TransactionPageComponent {
   onLeave(event: any) {
     event.target.removeChild(event.target.lastChild);
   }
+  
 
 }
