@@ -19,7 +19,7 @@
         <div class="col-8"></div>
         <div class="col-4 d-flex justify-content-around">
         <button class="position-realtive end-0 btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmCancel">Annuler</button>
-        <button class="position-realtive end-0 btn btn-success" >Confirmer</button>
+        <button class="position-realtive end-0 btn btn-success" (click)="this.transactionService.confirmTransaction()" >Confirmer</button>
         </div>
     </div>
 </div>

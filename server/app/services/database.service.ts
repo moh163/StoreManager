@@ -3,6 +3,7 @@ import { Category } from '@common/categorie';
 import { Item } from '@common/item';
 import { Db, MongoClient, ObjectId, ServerApiVersion } from 'mongodb';
 import { Service } from 'typedi';
+// import { toolKit } from 'utils/toolKit';
 @Service()
 export class DatabaseService {
     private uri = process.env.DATABASE_URL + '';// `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.8qj2oy6.mongodb.net/?retryWrites=true&w=majority`;
@@ -93,6 +94,24 @@ export class DatabaseService {
             await collection.updateOne(filter, updateDoc);
         } else {
             throw new Error('L\'item n\'existe pas');
+        }
+    }
+
+    async confirmTransaction(itemSold: Item[]): Promise<any> {
+        const collection = this.database.collection(this.ITEM_COLLECTION);
+        //toolKit.sortArrayByProperty(itemSold, 'id');
+        // collection.find({}).sort({ _id: 1 }).toArray();
+
+        for (let i = 0; i < itemSold.length; i++) {
+            const filter = { _id: new ObjectId(itemSold[i].id) };
+            const isInCollection = collection.find(filter); //peut etre ne pas utiliser le find et faire sois meme la recherche avec les arrays sorted
+            if (isInCollection) {
+                const newStock = itemSold[i].stock-itemSold[i].soldUnit > 0 ? itemSold[i].stock-itemSold[i].soldUnit : 0;
+                const updateDoc = { $set: { stock: newStock , soldUnit: itemSold[i].soldUnit } };
+                await collection.updateOne(filter, updateDoc);
+            } else {
+                throw new Error('L\'item n\'existe pas');
+            }
         }
     }
 }

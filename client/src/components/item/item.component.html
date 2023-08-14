@@ -56,7 +56,7 @@
             {{item.name}}
         </div>
         <div class="col-4 border">
-            <input #soldUnit type="number" class="form-control" value="0" min="0"> 
+            <input #soldUnit type="number" class="form-control" value="0" min="0" [max]="item.stock"> 
         </div>
         <div class="col-2 border">
             {{item.price}} $/u

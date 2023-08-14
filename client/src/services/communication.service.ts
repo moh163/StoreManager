@@ -31,4 +31,7 @@ export class CommunicationService {
   updateStock(stock: number, id: String): Observable<HttpResponse<string>> {
     return this.http.patch(`${this.baseUrl}/items/stock`,{stock: stock, id: id}, { observe: 'response', responseType: 'text' });
   }
+  confirmTransaction(itemSold: Item[]): Observable<HttpResponse<String>> {
+    return this.http.patch(`${this.baseUrl}/items/soldUnit`,{itemSold: itemSold},{ observe: 'response', responseType: 'text' });
+  }
 }

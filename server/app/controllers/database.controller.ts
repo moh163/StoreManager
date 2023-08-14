@@ -75,8 +75,15 @@ export class DatabaseController {
         }   
         );
 
-
-
-
+        this.router.patch('/items/soldUnit', async (req, res) => {
+            await this.databaseService.confirmTransaction(req.body.itemSold).then(() => {
+                res.sendStatus(HTTP_STATUS_CODES.OK);
+            }).catch((err) => {
+                console.log(err);
+                res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
+            }
+            );
+        });
+        
     }
 }
