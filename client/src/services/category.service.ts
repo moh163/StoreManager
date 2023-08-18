@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HTTP_STATUS_CODES } from '@common/const';
 import { CommunicationService } from './communication.service';
 import { Category } from '@common/categorie';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,15 @@ import { Category } from '@common/categorie';
 export class CategoryService {
 
   categories: Category[] = [];
+  venteTotal:number=0;
 
-  constructor(private communication: CommunicationService) { }
+  constructor(private communication: CommunicationService) { 
+    
+   
+  }
   async getCategories() {
     this.communication.getAllCategories().subscribe((res) => {
       if (res.status === HTTP_STATUS_CODES.OK) {
-        //console.log(res.body);
       this.categories= res.body as Category[];
       }
     });
@@ -34,6 +38,7 @@ export class CategoryService {
       }
     });
   }
+  
 }
 
 

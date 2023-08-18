@@ -1,8 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from '@common/categorie';
 import { HTTP_STATUS_CODES } from '@common/const';
 import { Item } from '@common/item';
+import { Subscription } from 'rxjs';
+import { CategoryService } from 'src/services/category.service';
 import { CommunicationService } from 'src/services/communication.service';
+import { HistoVenteService } from 'src/services/histo-vente.service';
 
 @Component({
   selector: 'app-categorie',
@@ -10,18 +14,38 @@ import { CommunicationService } from 'src/services/communication.service';
   styleUrls: ['./categorie.component.css']
 })
 export class CategorieComponent {
-    @Input() category: Category = {name: ''};
-    items: Item[] = [];
-    constructor(private communication: CommunicationService) { }
-    async ngOnInit() {
-      await this.getItemsByCat(this.category.name);
-    }
+  @Input() category: Category = { name: '' };
+  items: Item[] = [];
+  venteTotaleCat: number = 0;
+  subscription: Subscription = new Subscription();
+  constructor(private communication: CommunicationService, private histoVenteService: HistoVenteService, private router: Router) {
+  }
+  async ngOnInit() {
+    await this.getItemsByCat(this.category.name);
+  }
 
-    async getItemsByCat(catName: string) {
-      this.communication.getItemsByCat(catName).subscribe((res) => {
-        if (res.status === HTTP_STATUS_CODES.OK) {
-          this.items=res.body as Item[];
+
+  async getItemsByCat(catName: string) {
+    this.subscription= this.communication.getItemsByCat(catName).subscribe((res) => {
+      if (res.status === HTTP_STATUS_CODES.OK) {
+        this.items = res.body as Item[];
+        if (this.router.url === "/histoVente") {
+          this.sumPriceTotal();
         }
-      });
+      }
+    });
+
+  }
+
+  sumPriceTotal() {
+    for (let i = 0; i < this.items.length; i++) {
+      this.venteTotaleCat += this.items[i].soldUnit * this.items[i].price;
     }
+    this.histoVenteService.venteTotalObs.next(this.venteTotaleCat);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    console.log("subscription unsubscribed");
+  }
 }

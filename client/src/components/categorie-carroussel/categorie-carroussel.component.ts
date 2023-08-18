@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Category } from '@common/categorie';
 import { HTTP_STATUS_CODES } from '@common/const';
 import { CategoryService } from 'src/services/category.service';
-import { CommunicationService } from 'src/services/communication.service';
 
 @Component({
   selector: 'app-categorie-carroussel',
@@ -12,7 +11,7 @@ import { CommunicationService } from 'src/services/communication.service';
 export class CategorieCarrousselComponent {
   
  
-constructor(private communication: CommunicationService, public categoryService: CategoryService) { }
+constructor( public categoryService: CategoryService) { }
 async ngOnInit() {
   await this.categoryService.getCategories();
   
