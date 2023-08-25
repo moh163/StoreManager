@@ -34,4 +34,7 @@ export class CommunicationService {
   confirmTransaction(itemSold: Item[]): Observable<HttpResponse<String>> {
     return this.http.patch(`${this.baseUrl}/items/soldUnit`,{itemSold: itemSold},{ observe: 'response', responseType: 'text' });
   }
+  getTransactionByDate(startDate: Date, endDate:Date): Observable<HttpResponse<object>> {
+    return this.http.get(`${this.baseUrl}/transactions/${startDate}/${endDate}`, { observe: 'response' });
+  }
 }

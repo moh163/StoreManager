@@ -17,6 +17,7 @@ export class DatabaseService {
     private DB_NAME = process.env.DATABASE_NAME + '';
     private CATEGORIE_COLLECTION = process.env.DATABASE_COLLECTION_CAT + '';
     private ITEM_COLLECTION = process.env.DATABASE_COLLECTION_IT + '';
+    private TRANSACTION_COLLECTION = process.env.DATABASE_COLLECTION_TRA + '';
     private database: Db = this.client.db(this.DB_NAME);
 
     // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -98,20 +99,33 @@ export class DatabaseService {
     }
 
     async confirmTransaction(itemSold: Item[]): Promise<any> {
-        const collection = this.database.collection(this.ITEM_COLLECTION);
+        const collectionItem = this.database.collection(this.ITEM_COLLECTION);
+        const collectionTransaction = this.database.collection(this.TRANSACTION_COLLECTION);
+        const totalArgent: number = itemSold.reduce((acc, item) => acc + item.soldUnit * item.price, 0);
+        const newTransaction = {
+            items: itemSold,
+            total: totalArgent,
+            date: new Date()
+        };
+        await collectionTransaction.insertOne(newTransaction);
         //toolKit.sortArrayByProperty(itemSold, 'id');
         // collection.find({}).sort({ _id: 1 }).toArray();
 
         for (let i = 0; i < itemSold.length; i++) {
             const filter = { _id: new ObjectId(itemSold[i].id) };
-            const isInCollection = collection.find(filter); //peut etre ne pas utiliser le find et faire sois meme la recherche avec les arrays sorted
+            const isInCollection = collectionItem.find(filter); //peut etre ne pas utiliser le find et faire sois meme la recherche avec les arrays sorted
             if (isInCollection) {
                 const newStock = itemSold[i].stock-itemSold[i].soldUnit > 0 ? itemSold[i].stock-itemSold[i].soldUnit : 0;
                 const updateDoc = { $set: { stock: newStock , soldUnit: itemSold[i].soldUnit } };
-                await collection.updateOne(filter, updateDoc);
+                await collectionItem.updateOne(filter, updateDoc);
             } else {
                 throw new Error('L\'item n\'existe pas');
             }
         }
+    }
+
+    getTransactionByDate(startDate: Date, endDate: Date): Promise<any> {
+        const collection = this.database.collection(this.TRANSACTION_COLLECTION);
+        return collection.find({ date: { $gte: startDate, $lte: endDate } }).toArray();
     }
 }

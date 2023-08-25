@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink="/home">
+    <a class="navbar-brand" routerLink="/home" active>
         <i class="fa-solid fa-house"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,16 +11,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a class="nav-link" routerLink="/inventaire">Inventaire</a>
+                <a class="nav-link" routerLink="/inventaire" (click)="this.switchActive($event)">Inventaire</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " routerLink="/histoVente">Historique de vente</a>
+                <a class="nav-link " routerLink="/histoVente" (click)="this.switchActive($event)">Historique de vente</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" routerLink="/finance">Finance</a>
+                <a class="nav-link" routerLink="/finance" (click)="this.switchActive($event)">Finance</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " routerLink="/transaction">Effectuer une transaction</a>
+                <a class="nav-link " routerLink="/transaction" (click)="this.switchActive($event)">Effectuer une transaction</a>
             </li>
         </ul>
     </div>

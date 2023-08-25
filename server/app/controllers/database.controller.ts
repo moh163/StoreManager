@@ -84,6 +84,17 @@ export class DatabaseController {
             }
             );
         });
+
+        this.router.get('/transactions/:startDate?/:endDate?', async (req, res) => {
+            const startDate = req.params.startDate? new Date(req.params.startDate): new Date(0);
+            const endDate = req.params.endDate? new Date(req.params.endDate): new Date();
+            await this.databaseService.getTransactionByDate(startDate, endDate).then((transactions) => {
+                res.json(transactions).status(HTTP_STATUS_CODES.OK)
+            }).catch((err) => { 
+                console.log(err);
+                res.sendStatus(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR);
+            });
+        });
         
     }
 }

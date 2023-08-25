@@ -18,7 +18,7 @@ export class CategorieComponent {
   items: Item[] = [];
   venteTotaleCat: number = 0;
   subscription: Subscription = new Subscription();
-  constructor(private communication: CommunicationService, private histoVenteService: HistoVenteService, private router: Router) {
+  constructor(private communication: CommunicationService, private router: Router) {
   }
   async ngOnInit() {
     await this.getItemsByCat(this.category.name);
@@ -29,19 +29,9 @@ export class CategorieComponent {
     this.subscription= this.communication.getItemsByCat(catName).subscribe((res) => {
       if (res.status === HTTP_STATUS_CODES.OK) {
         this.items = res.body as Item[];
-        if (this.router.url === "/histoVente") {
-          this.sumPriceTotal();
-        }
       }
     });
 
-  }
-
-  sumPriceTotal() {
-    for (let i = 0; i < this.items.length; i++) {
-      this.venteTotaleCat += this.items[i].soldUnit * this.items[i].price;
-    }
-    this.histoVenteService.venteTotalObs.next(this.venteTotaleCat);
   }
 
   ngOnDestroy(): void {
