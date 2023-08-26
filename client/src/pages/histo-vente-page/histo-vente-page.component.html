@@ -2,50 +2,63 @@
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col-8">
-            <app-categorie-carroussel></app-categorie-carroussel>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switchView" (change)="this.switchView()">
+                <label class="form-check-label" for="switchView">Vue Catégorie</label>
+              </div>
+            <app-categorie-carroussel *ngIf="view==='catégorie'"></app-categorie-carroussel >
+            <div class="accordion accordion-flush" id="accordionTransaction" *ngIf="view==='transactions'">
+                <app-transaction *ngFor="let transaction of this.histoVenteService.transactions"
+                    [transaction]="transaction"></app-transaction>
+            </div>
 
-
-            
         </div>
         <div class="col-4 position-fixed end-0">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioBtn" id="radioAlways" checked (change)="switchEnabledDateInput($event)">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioAlways" checked
+                    (change)="switchEnabledDateInput($event)">
                 <label class="form-check-label" for="radioAlways">
                     Toujours
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioBtn" id="radioDaily"  (change)="switchEnabledDateInput($event)">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioDaily"
+                    (change)="switchEnabledDateInput($event)">
                 <label class="form-check-label" for="radioDaily">
                     Aujourd'hui
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioBtn" id="radioWeekly" (change)="switchEnabledDateInput($event)">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioWeekly"
+                    (change)="switchEnabledDateInput($event)">
                 <label class="form-check-label" for="radioWeekly">
                     Cette semaine
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioBtn" id="radioMonthly" (change)="switchEnabledDateInput($event)">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioMonthly"
+                    (change)="switchEnabledDateInput($event)">
                 <label class="form-check-label" for="radioMonthly">
                     Ce mois
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioBtn" id="radioAnnualy" (change)="switchEnabledDateInput($event)">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioAnnualy"
+                    (change)="switchEnabledDateInput($event)">
                 <label class="form-check-label" for="radioAnnualy">
                     Cette année
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioBtn" id="radioPersonalised" (change)="switchEnabledDateInput($event)">
+                <input class="form-check-input" type="radio" name="radioBtn" id="radioPersonalised"
+                    (change)="switchEnabledDateInput($event)">
                 <label class="form-check-label" for="radioPersonalised">
                     Personnalisé
                 </label>
                 <input id="dateInput" type="text" name="daterange" value="" class="form-control" disabled />
             </div>
-            <p class="m-3" style="color: green;">Les ventes totale {{this.timeRange}} sont de {{this.histoVenteService.venteTotal}} $</p>
+            <p class="m-3" style="color: green;">Les ventes totale {{this.timeRange}} sont de
+                {{this.histoVenteService.venteTotal}} $</p>
         </div>
     </div>
 </div>

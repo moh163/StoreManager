@@ -13,6 +13,7 @@ export class HistoVentePageComponent implements OnInit {
 
   timeRangeObs: BehaviorSubject<string> = new BehaviorSubject<string>("depuis le début");
   timeRange: string = "depuis le début";
+  view: string = "transactions";
   constructor(public histoVenteService: HistoVenteService, private applicationRef: ApplicationRef) { 
     this.timeRangeObs.subscribe((res) => {
       this.timeRange = res;
@@ -29,6 +30,9 @@ export class HistoVentePageComponent implements OnInit {
     this.switchTimeRange(document.getElementById("radioAlways") as HTMLInputElement);
   }
 
+  switchView(){
+    this.view === "transactions" ? this.view = "catégorie" : this.view = "transactions";
+  }
   switchEnabledDateInput(event: Event) {
     const target = event.target as HTMLInputElement
     const dateInput = document.getElementById("dateInput") as HTMLInputElement

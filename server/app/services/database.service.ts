@@ -124,8 +124,15 @@ export class DatabaseService {
         }
     }
 
-    getTransactionByDate(startDate: Date, endDate: Date): Promise<any> {
+    async getTransactionByDate(startDate: Date, endDate: Date): Promise<any> {
         const collection = this.database.collection(this.TRANSACTION_COLLECTION);
-        return collection.find({ date: { $gte: startDate, $lte: endDate } }).toArray();
+        const transactionArray= await collection.find({ date: { $gte: startDate, $lte: endDate } }).toArray()
+        return transactionArray.map((transaction) => ({
+            id: transaction._id.toString(),
+            items: transaction.items,
+            total: transaction.total,
+            date: transaction.date
+            }));
+
     }
 }

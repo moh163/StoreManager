@@ -1,1 +1,13 @@
-<p>transaction works!</p>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#flush-collapse'+transaction.id">
+            Transaction #{{transaction.id}} - {{this.transaction.date.toString().split(".")[0].replace("T"," ")}} -
+            <strong [style.color]="'green'">{{transaction.total}}$</strong>
+        </button>
+    </h2>
+    <div [attr.id]="'flush-collapse'+transaction.id" class="accordion-collapse collapse"
+        data-bs-parent="#accordionTransaction">
+        <app-item *ngFor="let item of transaction.items" [item]="item"></app-item>
+    </div>
+</div>
