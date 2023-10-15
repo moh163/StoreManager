@@ -8,7 +8,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
                 <a class="nav-link" routerLink="/inventaire" (click)="this.switchActive($event)">Inventaire</a>
@@ -22,6 +22,25 @@
             <!-- <li class="nav-item">
                 <a class="nav-link " routerLink="/transaction" (click)="this.switchActive($event)">Effectuer une transaction</a>
             </li> -->
+            <button class="rounded-circle btn btn-outline-light position-absolute end-0" data-bs-toggle="modal"
+            data-bs-target="#signInModal"><i class="fa-solid fa-user" style="color: #bfbfc0;"></i></button>
         </ul>
     </div>
 </nav>
+<div class="modal fade" id="signInModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="signInModalLabel">Connexion</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input class="form-control" type="text" placeholder="Nom d'utilisateur" id="username">
+                <input class="form-control mt-3" type="password" placeholder="Mot de passe" id="mdp">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success" (click)="connexion()">Connexion</button>
+            </div>
+        </div>
+    </div>

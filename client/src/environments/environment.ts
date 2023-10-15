@@ -6,6 +6,8 @@ export const environment = {
     production: false,
     serverUrl: 'http://localhost:3000/api',
     webSocketUrl: 'ws://localhost:3000',
+    username: '3amo',
+    password: '123456',
 };
 
 /*

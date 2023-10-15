@@ -7,7 +7,7 @@ import { MainPageComponent } from 'src/pages/main-page/main-page.component';
 import { TransactionPageComponent } from 'src/pages/transaction-page/transaction-page.component';
 
 const routes: Routes = [ 
-{ path: '', redirectTo: '/home', pathMatch: 'full' },
+{ path: '', redirectTo: '/transaction', pathMatch: 'full' },
 { path: 'home', component: MainPageComponent },
 { path: 'inventaire', component: InventairePageComponent },
 { path: 'histoVente', component: HistoVentePageComponent },

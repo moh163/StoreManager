@@ -46,3 +46,6 @@ Thumbs.db
 # dotenv environment variables file
 .env
 .env.test
+
+#angular environment variable
+*/src/environments/environment.ts
