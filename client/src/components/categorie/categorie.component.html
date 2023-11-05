@@ -1,11 +1,12 @@
 <div class="accordion-item" >
     <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            [attr.data-bs-target]="'#panelsStayOpen-collapse'+category.name">
+            [attr.data-bs-target]="'#panelsStayOpen-collapse'+  removeSpaces(category.name)">
+            
             {{category.name}}
         </button>
     </h2>
-    <div [attr.id]="'panelsStayOpen-collapse'+category.name" class="accordion-collapse collapse">
+    <div [attr.id]="'panelsStayOpen-collapse'+removeSpaces(category.name)" class="accordion-collapse collapse">
         <div class="accordion-body">
             <app-item *ngFor="let item of items" [item]="item" ></app-item>
         </div>

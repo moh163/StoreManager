@@ -34,6 +34,10 @@ export class CategorieComponent {
 
   }
 
+  removeSpaces(str: string) {
+    return str.replace(/\s/g, '');
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     console.log("subscription unsubscribed");
