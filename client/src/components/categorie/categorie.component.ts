@@ -21,22 +21,22 @@ export class CategorieComponent {
   constructor(private communication: CommunicationService, private router: Router) {
   }
   async ngOnInit() {
-    await this.getItemsByCat(this.category.name);
+    await this.getItemsByCat(this.category.id as string);
   }
 
 
-  async getItemsByCat(catName: string) {
-    this.subscription= this.communication.getItemsByCat(catName).subscribe((res) => {
+  async getItemsByCat(catId: string) {
+    this.subscription= this.communication.getItemsByCat(catId).subscribe((res) => {
       if (res.status === HTTP_STATUS_CODES.OK) {
         this.items = res.body as Item[];
+        console.log(this.category.name);
+        console.log(this.items);
       }
     });
 
   }
 
-  removeSpaces(str: string) {
-    return str.replace(/\s/g, '');
-  }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -69,9 +69,12 @@ export class DatabaseService {
 
     }
 
-    async getItemByCat(catName: string): Promise<Item[]> {
+    async getItemByCat(catId: string): Promise<Item[]> {
         const collection = this.database.collection(this.ITEM_COLLECTION)
-        const itemInCat = await collection.find({ categorie: catName }).toArray();
+        
+        const itemInCat = await collection.find({categorie: catId}).toArray();
+        console.log(catId);
+        console.log(itemInCat);
         return itemInCat.map((item) => ({
             id: item._id.toString(),
             name: item.name,

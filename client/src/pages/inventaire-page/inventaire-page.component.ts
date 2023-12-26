@@ -39,6 +39,7 @@ export class InventairePageComponent {
     const priceItem = inputPrice.valueAsNumber;
     const stockItem = inputStock.valueAsNumber;
     const categorieItem = inputCategorie.value;
+    console.log(categorieItem);
     return new Promise<void>((resolve, reject) => {
       if (nameItem && priceItem && stockItem && categorieItem) {
         const item: Item = { name: nameItem, price: priceItem, stock: stockItem, soldUnit: 0, categorie: categorieItem };
@@ -62,7 +63,7 @@ export class InventairePageComponent {
           }
         });
       } else {
-        reject(new Error('Aucun nom inscris'));
+        reject(new Error('Informations manquantes'));
       }
     });
 

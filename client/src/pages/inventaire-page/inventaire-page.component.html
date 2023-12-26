@@ -49,7 +49,7 @@
                             <select class="form-select mt-3" id="itemCat">
                                 <option selected>Choisissez une catégorie</option>
                                 <!--  mettre ngfor pour chaque categorie--> 
-                                <option *ngFor="let category of categoryService.categories">{{category.name}}</option>
+                                <option *ngFor="let category of categoryService.categories" value="{{category.id}}">{{category.name}}</option>
                             </select>
                             <button class="btn btn-primary mt-3" type="button" (click)="addItem()">Ajouter</button>
                         </div>

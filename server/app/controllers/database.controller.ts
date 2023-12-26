@@ -55,8 +55,8 @@ export class DatabaseController {
             });
         });
 
-        this.router.get('/items/:catName', async (req, res) => {
-            await this.databaseService.getItemByCat(req.params.catName).then((items) => {
+        this.router.get('/items/:catId', async (req, res) => {
+            await this.databaseService.getItemByCat(req.params.catId).then((items) => {
                 res.json(items).status(HTTP_STATUS_CODES.OK)
             }).catch((err) => { 
                 console.log(err);
